@@ -1,8 +1,9 @@
 const express = require("express");
 const dayjs = require("dayjs");
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080;
 
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 
 app.get("/time", (req, res) => {
@@ -10,8 +11,8 @@ app.get("/time", (req, res) => {
 	res.send(`${current}`);
 });
 
-app.get("/brownie", (req, res) => {
-	const path = __dirname + "/public/Brownies.txt";
+app.get("/form", (req, res) => {
+	const path = __dirname + "/public/index.html";
 	res.sendFile(path, (err) => {
 		if (err) {
 			throw err;
@@ -19,6 +20,11 @@ app.get("/brownie", (req, res) => {
 	});
 });
 
+app.post("/input", (req, res) => {
+	const fName = req.body.firstName;
+	res.send(fName);
+});
+
 app.listen(port, () => {
-	console.log(`Server is rusning on ${port}`);
+	console.log(`Server is running on ${port}`);
 });
