@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 
 app.get("/time", (req, res) => {
-	let current = dayjs().format("MM/DD/YYYY"); // NOTE: must be all caps
+	let current = dayjs().format("MM/DD/YYYY");
 	res.send(`${current}`);
 });
 
